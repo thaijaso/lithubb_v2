@@ -59,14 +59,26 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     if integerToCheckUser > -1 {
                         self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
                     } else {
-                        let alert = UIAlertController(title: "Login Error", message: "Incorrect email or password", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                        self.showSimpleAlertWithMessage("Incorrect email or password")
                     }
                 }
             }
 
         }
         
+    }
+    
+    //    had to use this helper to quick solve a problem presenting an alert upon submission of a valid email and invalid password.
+    func showSimpleAlertWithMessage(message: String!) {
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let cancel = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        
+        alertController.addAction(cancel)
+        
+        if self.presentedViewController == nil {
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     //helper function for email validation
