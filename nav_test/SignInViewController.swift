@@ -108,6 +108,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     //text fields are checking on "Edit Changed"
     
     @IBAction func liveTextFieldValidate(sender: UITextField) {
+        liveColorValidation(emailTextField.text!, password: passTextField.text!)
     }
 
     func liveColorValidation(email: String, password: String) {

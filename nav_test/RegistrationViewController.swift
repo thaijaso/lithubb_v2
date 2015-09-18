@@ -72,8 +72,15 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
                 request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
                 NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                     (response, data, error) in
-                    let x = JSON(data: data!)
-                    print(x,"here")
+                    let dataToPrint = JSON(data: data!)
+                    print(dataToPrint,"here")
+                    let integerToCheckUser = Int(String(dataToPrint[0]["id"]))
+                    if integerToCheckUser > -1 {
+                        self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
+                    } else {
+                        let alert = UIAlertController(title: "Registration Error", message: "error?", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    }
                 }
             }
         }
@@ -81,7 +88,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
     
     //text fields are checking on "Edit Changed". All textfields are connected to this method.
     @IBAction func liveTextFieldValidate(sender: AnyObject) {
-        
+        liveColorValidation(emailTextField.text!, password: passTextField.text!, passConfirm: confirmPassTextField.text!, firstName: firstNameTextField.text!, lastName: lastNameTextField.text!, phone: phoneTextField.text!)
     }
 
     func liveColorValidation(email: String, password: String, passConfirm: String, firstName: String, lastName: String, phone: String) {
