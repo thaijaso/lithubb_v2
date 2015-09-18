@@ -18,36 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sVP-5z-mMj">
-                                <rect key="frame" x="20" y="269" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <connections>
-                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="Ohx-RM-Qpo"/>
-                                </connections>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bHG-1z-Lf6">
                                 <rect key="frame" x="20" y="193" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="emailIsUniqueValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="3VY-et-kZE"/>
                                     <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="1Ap-19-4r7"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJx-e4-ysk">
-                                <rect key="frame" x="20" y="231" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="QSK-YW-glW"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Confirm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTl-97-fgD">
-                                <rect key="frame" x="20" y="307" width="560" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                <connections>
-                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="OP7-gE-NMB"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C4C-Eh-S0c">
@@ -106,6 +83,36 @@
                                     <action selector="registerButtonPressed:" destination="G6R-bM-GhJ" eventType="touchUpInside" id="i8P-et-NHM"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lK-4A-aaL">
+                                <rect key="frame" x="25" y="224" width="29" height="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sVP-5z-mMj">
+                                <rect key="frame" x="20" y="278" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="Ohx-RM-Qpo"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oJx-e4-ysk">
+                                <rect key="frame" x="20" y="240" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="QSK-YW-glW"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password Confirm" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mTl-97-fgD">
+                                <rect key="frame" x="20" y="316" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="liveTextFieldValidate:" destination="G6R-bM-GhJ" eventType="editingChanged" id="OP7-gE-NMB"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -117,6 +124,7 @@
                             <constraint firstItem="C4C-Eh-S0c" firstAttribute="top" secondItem="vtf-AU-vC6" secondAttribute="bottom" constant="8" id="86Y-bs-gdB"/>
                             <constraint firstItem="mTl-97-fgD" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" id="AKL-4h-S21"/>
                             <constraint firstItem="vtf-AU-vC6" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="AP4-Ai-W7a"/>
+                            <constraint firstItem="4lK-4A-aaL" firstAttribute="top" secondItem="bHG-1z-Lf6" secondAttribute="bottom" constant="1" id="Aeb-TN-ZWc"/>
                             <constraint firstItem="sVP-5z-mMj" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="FYR-3m-NeV"/>
                             <constraint firstItem="mTl-97-fgD" firstAttribute="top" secondItem="sVP-5z-mMj" secondAttribute="bottom" constant="8" id="Ghc-1i-QC3"/>
                             <constraint firstItem="sVP-5z-mMj" firstAttribute="top" secondItem="oJx-e4-ysk" secondAttribute="bottom" constant="8" id="Jly-4E-jm8"/>
@@ -125,6 +133,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="bHG-1z-Lf6" secondAttribute="trailing" id="Lbz-Y4-t9e"/>
                             <constraint firstItem="C4C-Eh-S0c" firstAttribute="top" secondItem="vtf-AU-vC6" secondAttribute="bottom" constant="8" id="MPm-OT-7WY"/>
                             <constraint firstItem="oJx-e4-ysk" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="NZ6-6y-6qy"/>
+                            <constraint firstItem="4lK-4A-aaL" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" constant="5" id="Na1-nq-FqY"/>
                             <constraint firstItem="bHG-1z-Lf6" firstAttribute="top" secondItem="C4C-Eh-S0c" secondAttribute="bottom" constant="8" id="RPn-t1-qVG"/>
                             <constraint firstItem="I5G-Hi-0GI" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" id="W0L-tP-V0Z"/>
                             <constraint firstItem="vtf-AU-vC6" firstAttribute="top" secondItem="6N9-lU-RvH" secondAttribute="bottom" constant="33" id="YHb-1b-P7K"/>
@@ -133,7 +142,7 @@
                             <constraint firstItem="mTl-97-fgD" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="eoX-kR-xzS"/>
                             <constraint firstItem="6N9-lU-RvH" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="etm-bx-siS"/>
                             <constraint firstItem="sVP-5z-mMj" firstAttribute="top" secondItem="oJx-e4-ysk" secondAttribute="bottom" constant="8" id="glx-dJ-jqr"/>
-                            <constraint firstItem="oJx-e4-ysk" firstAttribute="top" secondItem="bHG-1z-Lf6" secondAttribute="bottom" constant="8" id="j1y-2M-Pb8"/>
+                            <constraint firstItem="oJx-e4-ysk" firstAttribute="top" secondItem="4lK-4A-aaL" secondAttribute="bottom" constant="2" id="iZ4-f4-drK"/>
                             <constraint firstItem="I5G-Hi-0GI" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="n4T-FX-SCP"/>
                             <constraint firstItem="6N9-lU-RvH" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" id="ojs-Sv-Bos"/>
                             <constraint firstItem="JUA-7l-oda" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="pQq-c2-39T"/>
@@ -144,7 +153,6 @@
                             <constraint firstItem="29F-XY-sU5" firstAttribute="top" secondItem="I5G-Hi-0GI" secondAttribute="bottom" constant="20" id="tcm-mA-WG7"/>
                             <constraint firstItem="I5G-Hi-0GI" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" id="tqM-6F-ZyN"/>
                             <constraint firstItem="6N9-lU-RvH" firstAttribute="top" secondItem="DUN-uI-PGs" secondAttribute="bottom" constant="8" id="v1k-Tf-pqR"/>
-                            <constraint firstItem="oJx-e4-ysk" firstAttribute="top" secondItem="bHG-1z-Lf6" secondAttribute="bottom" constant="8" id="vMV-UE-ThE"/>
                             <constraint firstItem="I5G-Hi-0GI" firstAttribute="trailing" secondItem="aHD-cp-GhQ" secondAttribute="trailingMargin" id="wS8-iS-8Ev"/>
                             <constraint firstItem="JUA-7l-oda" firstAttribute="leading" secondItem="aHD-cp-GhQ" secondAttribute="leadingMargin" id="xHB-2U-Dq7"/>
                         </constraints>
@@ -152,6 +160,7 @@
                     <navigationItem key="navigationItem" title="Lithubb" id="2HI-J1-Fs8"/>
                     <connections>
                         <outlet property="confirmPassTextField" destination="mTl-97-fgD" id="xCU-qB-h0r"/>
+                        <outlet property="emailErrorLabel" destination="4lK-4A-aaL" id="YCU-pu-GvZ"/>
                         <outlet property="emailTextField" destination="bHG-1z-Lf6" id="lce-Qi-Vo7"/>
                         <outlet property="firstNameTextField" destination="vtf-AU-vC6" id="PEB-XU-228"/>
                         <outlet property="lastNameTextField" destination="C4C-Eh-S0c" id="8tk-Tw-Cyz"/>
@@ -943,6 +952,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Yb6-fl-9Mf"/>
+        <segue reference="UVj-Gv-eJK"/>
     </inferredMetricsTieBreakers>
 </document>
