@@ -16,7 +16,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     var cameraLocation: CLLocationCoordinate2D?
     var locationManager = CLLocationManager()
     var locationArray = [CLLocation]()
-
+    var mapView = GMSMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,23 +28,22 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         locationManager.distanceFilter = 2000
         locationManager.startUpdatingLocation()
         print("after locationmanager")
-        var mapView = GMSMapView()
         print("after mapview")
         mapView.myLocationEnabled = true
         print("location enabled")
         mapView.settings.myLocationButton = true
-        print(cameraLocation)
+        cameraLocation = locationManager.location?.coordinate
         if var cameraLocation = locationManager.location?.coordinate {
             print("Camera location was set by the location manager")
             let camera = GMSCameraPosition.cameraWithLatitude(cameraLocation.latitude, longitude: cameraLocation.longitude, zoom: 15)
             cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
-            var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+            mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
             
         } else {
             print("camera location could not be set by location manager, reverting to defaults")
             let camera = GMSCameraPosition.cameraWithLatitude(47.610377, longitude: -122.2006786, zoom: 15)
             cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
-            var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+            mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
         }
         
         self.view = mapView
@@ -92,6 +91,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
                     marker.userData = dispensary.id
                 
                 }
+
         } else {
             locationArray.append(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude))
             mapView.clear()

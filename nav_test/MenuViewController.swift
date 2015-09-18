@@ -61,8 +61,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let symbol = arrOfProducts[i]["symbol"].string
                     let description = arrOfProducts[i]["description"].string
                     let fullImage = arrOfProducts[i]["fullsize_img1"].string
-                    
                     let dispensaryMenu = Menu(dispensaryName: dispensaryName!, strainID: strainID!, vendorID: vendorID!, priceGram: priceGram!, priceEigth: priceEigth!, priceQuarter: priceQuarter!, priceHalf: priceHalf!, priceOz: priceOz!, strainName: strainName!, category: category!, description: description!)
+                    dispensaryMenu.fullsize_img1 = fullImage
                     menu.append(dispensaryMenu)
                 }
             }

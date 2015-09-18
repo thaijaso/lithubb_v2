@@ -35,6 +35,19 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         getOrder()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if orders.count > 0 {
+            orderStatusLabel.hidden = false
+            orderProgressBar.hidden = false
+            dispensaryLabel.hidden = false
+            cancelButton.hidden = false
+            ordersTable.hidden = false
+            getCurrentUser()
+        } else {
+            getOrder()
+        }
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return orders.count
@@ -42,8 +55,8 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("OrderCell") as! OrderCell
-        let order = orders[indexPath.row]
-        let price = prices[indexPath.row]
+        let order = orders[0]
+        let price = prices[0]
         cell.strainLabel.text = order
         cell.priceLabel.text = price
         return cell
@@ -63,7 +76,6 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-
     @IBAction func cancelOrder(sender: UIButton) {
         if let urlToReq = NSURL(string: "http://192.168.1.140:7000/cancelOrder"){
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
@@ -119,31 +131,31 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
                 let vendorToPass = vendor.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
                 self.dispensaryLabel.text = vendorToPass
                 //this is for if we later on allow more than one strain. That's why it's in a for loop.
-                for var i = 0; i < realData.count; ++i {
-                    self.orders.append(String(realData[i]["name"]))
+                if self.orders.count == 0 {
+                    self.orders.append(String(realData[0]["name"]))
                     self.ordersTable.reloadData()
                 }
-                print("did")
                 //this price is not ready for more strains
-                if String(realData[0]["quantity_half"]) == "1" {
-                    let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(14.15))
-                    self.prices.append("(priceToPass")
-                    self.ordersTable.reloadData()
-                } else if String(realData[0]["quantity_eighth"]) == "1" {
-                    let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(3.54))
-                    self.prices.append(priceToPass)
-                    self.ordersTable.reloadData()
-                } else if String(realData[0]["quantity_gram"]) == "1" {
-                    let priceToPass = String(Double(String(realData[0]["price_gram"]))!)
-                    self.prices.append(priceToPass)
-                    self.ordersTable.reloadData()
-                } else if String(realData[0]["quantity_oz"]) == "1" {
-                    let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(28.29))
-                    self.prices.append(priceToPass)
-                    self.ordersTable.reloadData()
+                if self.prices.count == 0 {
+                    if String(realData[0]["quantity_half"]) == "1" {
+                        let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(14.15))
+                        self.prices.append("(priceToPass")
+                        self.ordersTable.reloadData()
+                    } else if String(realData[0]["quantity_eigth"]) == "1" {
+                        let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(3.54))
+                        self.prices.append(priceToPass)
+                        self.ordersTable.reloadData()
+                    } else if String(realData[0]["quantity_gram"]) == "1" {
+                        let priceToPass = String(Double(String(realData[0]["price_gram"]))!)
+                        self.prices.append(priceToPass)
+                        self.ordersTable.reloadData()
+                    } else if String(realData[0]["quantity_oz"]) == "1" {
+                        let priceToPass = String(Double(String(realData[0]["price_gram"]))! * Double(28.29))
+                        self.prices.append(priceToPass)
+                        self.ordersTable.reloadData()
+                    }
                 }
             }
         }
-        
     }
 }
