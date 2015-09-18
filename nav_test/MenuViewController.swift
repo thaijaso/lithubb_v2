@@ -114,6 +114,13 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         performSegueWithIdentifier("ShowProduct", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let productViewController = segue.destinationViewController as! ProductViewController
+        if let indexPath = productTableView.indexPathForCell(sender as! UITableViewCell) {
+            productViewController.menuItem = menu[indexPath.row]
+        }
+
+        
+    }
     
 }
