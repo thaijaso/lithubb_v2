@@ -9,6 +9,8 @@
 import UIKit
 
 class DispensariesViewController: UITableViewController {
+    
+    
     var dispensaries = [Dispensary]()
     
     override func viewDidLoad() {
@@ -20,6 +22,7 @@ class DispensariesViewController: UITableViewController {
         if let urlToReq = NSURL(string: "http://192.168.1.140:7000/dispensaries") {
             if let data = NSData(contentsOfURL: urlToReq) {
                 let arrOfDispensaries = parseJSON(data)
+                print(arrOfDispensaries, "arrrrrr")
                 for dispensary in arrOfDispensaries! {
                     let object = dispensary as! NSDictionary
                     let id = object["id"] as! Int
@@ -28,9 +31,11 @@ class DispensariesViewController: UITableViewController {
                     let phone = object["phone"] as! String
                     let city = object["City"] as! String
                     let state = object["State"] as! String
+                    let logo = object["logo"] as! String
                     //let latitude = object["latitude"] as! Double
                     //let longitude = object["longitude"] as! Double
-                    dispensaries.append(Dispensary(id: id, name: name, address: address, city: city, state: state, phone: phone))
+                    let dispensaryToAppend = Dispensary(id: id, name: name, address: address, city: city, state: state, phone: phone, logo: logo)
+                    dispensaries.append(dispensaryToAppend)
                 }
             }
         }
@@ -64,7 +69,25 @@ class DispensariesViewController: UITableViewController {
         cell.dispensaryPhone!.text = dispensary.phone
         cell.dispensaryStreetAddress!.text = dispensary.address
         cell.dispensaryCityState!.text = dispensary.city.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) + ", " + dispensary.state
-        //cell.dispensaryHours!.text = dispensary.hours
+//        cell.dispensaryHours!.text = dispensary.hours
+       print(dispensary.logo, "cat")
+        
+        let request: NSURLRequest = NSURLRequest(URL: NSURL(string: dispensary.logo)!)
+        let mainQueue = NSOperationQueue.mainQueue()
+        NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+            if error == nil {
+                // Convert the downloaded data in to a UIImage object
+                // Update the cell
+                dispatch_async(dispatch_get_main_queue(), {
+                    if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+                        cell.dispensaryLogo.image = UIImage(data: data!)
+                    }
+                })
+            }
+            else {
+                print("Error: \(error!.localizedDescription)")
+            }
+        })
         return cell
     }
     

@@ -131,8 +131,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
                         let dispensaryState = arrOfDispensaries[i]["State"].string
                         let dispensaryCity = arrOfDispensaries[i]["City"].string
                         let dispensaryPhone = arrOfDispensaries[i]["phone"].string
-                        
-                        let dispensary = Dispensary(id: dispensaryID!, name: dispensaryName!, address: dispensaryAdd!, city: dispensaryCity!, state: dispensaryState!, phone: dispensaryPhone!)
+                        let dispensaryLogo = arrOfDispensaries[i]["logo"].string
+                        let dispensary = Dispensary(id: dispensaryID!, name: dispensaryName!, address: dispensaryAdd!, city: dispensaryCity!, state: dispensaryState!, phone: dispensaryPhone!, logo: dispensaryLogo!)
                         dispensary.latitude = dispensaryLat!
                         dispensary.longitude = dispensaryLng!
                         self.dispensaries.append(dispensary)

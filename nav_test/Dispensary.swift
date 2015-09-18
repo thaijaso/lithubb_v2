@@ -17,9 +17,10 @@ class Dispensary {
     var latitude: Double?
     var longitude: Double?
     var phone: String
+    var logo: String
     //var hours: String
     
-    init(id: Int, name: String, address: String, city: String, state: String, phone: String) {
+    init(id: Int, name: String, address: String, city: String, state: String, phone: String, logo: String) {
         self.id = id
         self.name = name
         self.address = address
@@ -28,5 +29,6 @@ class Dispensary {
         //self.latitude = latitude
         //self.longitude = longitude
         self.phone = phone
+        self.logo = logo
     }
 }

@@ -497,9 +497,9 @@
                                     <action selector="filterButtonPressed:" destination="FuC-7B-6P0" eventType="touchUpInside" id="CTc-e6-n1j"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-GX-A2v">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aAB-GX-A2v">
                                 <rect key="frame" x="482" y="408" width="118" height="86"/>
-                                <color key="backgroundColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                 <state key="normal" title="Edible"/>
                                 <connections>
                                     <action selector="filterButtonPressed:" destination="FuC-7B-6P0" eventType="touchUpInside" id="TnI-HO-OaV"/>
@@ -571,7 +571,12 @@
                     <navigationItem key="navigationItem" title="Dispensary Name" id="jS2-aF-WzG"/>
                     <connections>
                         <outlet property="dispensaryName" destination="jS2-aF-WzG" id="doN-xL-UcL"/>
+                        <outlet property="edibleButton" destination="aAB-GX-A2v" id="lCf-Xs-Quy"/>
+                        <outlet property="hybridButton" destination="1gA-q4-08F" id="clV-Bh-YPV"/>
+                        <outlet property="indicaButton" destination="W5L-7T-2u9" id="b0n-Rd-Okt"/>
+                        <outlet property="otherButton" destination="0qI-B3-ado" id="1jn-eT-DRl"/>
                         <outlet property="productTableView" destination="P6v-4j-N3H" id="W9x-T5-k8y"/>
+                        <outlet property="sativaButton" destination="bLY-DA-dNE" id="QcU-Nj-yCc"/>
                         <segue destination="4FZ-dM-ssn" kind="show" identifier="ShowProduct" id="Mh3-k9-PKp"/>
                     </connections>
                 </viewController>

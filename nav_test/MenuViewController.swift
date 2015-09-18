@@ -17,6 +17,11 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var dispensaryName: UINavigationItem!
+    @IBOutlet weak var indicaButton: UIButton!
+    @IBOutlet weak var hybridButton: UIButton!
+    @IBOutlet weak var sativaButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
+    @IBOutlet weak var edibleButton: UIButton!
     
     
     @IBAction func filterButtonPressed(sender: UIButton) {
@@ -62,6 +67,29 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
             }
         }
+        // set images and text for buttons
+        edibleButton.setBackgroundImage(UIImage(named: "edibles"), forState: UIControlState.Normal)
+        let ediblesAttributedTitle = NSAttributedString(string: "edibles",
+            attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
+        edibleButton.setAttributedTitle(ediblesAttributedTitle, forState: .Normal)
+        indicaButton.setBackgroundImage(UIImage(named: "indica"), forState: .Normal)
+        let indicaAttributedTitle = NSAttributedString(string: "indica",
+            attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
+        indicaButton.setAttributedTitle(indicaAttributedTitle, forState: .Normal)
+        sativaButton.setBackgroundImage(UIImage(named: "sativa"), forState: .Normal)
+        let sativaAttributedTitle = NSAttributedString(string: "sativa",
+            attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
+        sativaButton.setAttributedTitle(sativaAttributedTitle, forState: .Normal)
+        hybridButton.setBackgroundImage(UIImage(named: "hybrid"), forState: .Normal)
+        let hybridAttributedTitle = NSAttributedString(string: "hybrid",
+            attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
+        hybridButton.setAttributedTitle(hybridAttributedTitle, forState: .Normal)
+        otherButton.setBackgroundImage(UIImage(named: "other"), forState: .Normal)
+        let otherAttributedTitle = NSAttributedString(string: "other",
+            attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
+        otherButton.setAttributedTitle(otherAttributedTitle, forState: .Normal)
+        
+        
         productTableView.dataSource = self
         productTableView.delegate = self
         
