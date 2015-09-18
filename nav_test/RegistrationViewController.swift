@@ -18,6 +18,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     @IBOutlet weak var confirmPassTextField: UITextField!
+    @IBOutlet weak var emailErrorLabel: UILabel!
 
     
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
         self.phoneTextField.delegate = self
         self.passTextField.delegate = self
         self.confirmPassTextField.delegate = self
+        self.emailErrorLabel.hidden = true
     }
     
     //Calls this function when the tap is recognized.
@@ -39,6 +41,32 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
         view.endEditing(true)
     }
 
+    @IBAction func emailIsUniqueValidate(sender: AnyObject) {
+        
+        if validateEmail(emailTextField.text!) {
+            if let urlToReq = NSURL(string: "http://192.168.1.140:7000/findUser") {
+                let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
+                request.HTTPMethod = "POST"
+                // Get all info from textfields to send to node server
+                let bodyData = "email=\(emailTextField.text!)"
+                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+                    (response, data, error) in
+                    let dataToPrint = JSON(data: data!)
+                    if String(dataToPrint) == String("user exists") {
+                        self.emailTextField.layer.borderColor = UIColor.redColor().CGColor
+                        self.emailTextField.layer.borderWidth = 2
+                        self.emailErrorLabel.textColor = UIColor.redColor()
+                        self.emailErrorLabel.text = "*email is not unique"
+                        self.emailErrorLabel.hidden = false
+                    } else {
+                        self.emailErrorLabel.hidden = true
+                    }
+                }
+            }
+        }
+        
+    }
     
     //Disappears keyboard when return is pressed
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -74,15 +102,31 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
                     (response, data, error) in
                     let dataToPrint = JSON(data: data!)
                     print(dataToPrint,"here")
-                    let integerToCheckUser = Int(String(dataToPrint[0]["id"]))
-                    if integerToCheckUser > -1 {
-                        self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
+                    print(dataToPrint.type)
+                    if String(dataToPrint) == String("duplicate user") {
+                        print("nosegue")
+                        self.showSimpleAlertWithMessage("duplicate email")
                     } else {
-                        let alert = UIAlertController(title: "Registration Error", message: "error?", preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                        print("segue")
+                        self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
                     }
                 }
+                
             }
+        }
+    }
+    
+    
+//    had to use this helper to quick solve a problem presenting an alert upon submission of a duplicate email.
+    func showSimpleAlertWithMessage(message: String!) {
+        
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let cancel = UIAlertAction(title: "Ok", style: .Cancel, handler: nil)
+        
+        alertController.addAction(cancel)
+        
+        if self.presentedViewController == nil {
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
@@ -136,6 +180,8 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate, NSURLSe
         }
 
     }
+    
+    
     
     //helper function for email validation
     func validateEmail(candidate: String) -> Bool {
