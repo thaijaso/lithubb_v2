@@ -46,7 +46,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(isValidLogin, animated: true, completion: nil)
         } else {
             // now we request to get check the email with the server
-            if let urlToReq = NSURL(string: "http://192.168.1.140:7000/loginUser") {
+            if let urlToReq = NSURL(string: "http://10.0.0.136:7000/loginUser") {
                 let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
                 request.HTTPMethod = "POST"
                 // Get all info from textfields to send to node server

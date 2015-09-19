@@ -51,7 +51,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     
     func getCurrentUser() {
         // gets current user email and id
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/currentUser") {
+        if let urlToReq = NSURL(string: "http://10.0.0.136:7000/currentUser") {
             if let data = NSData(contentsOfURL: urlToReq) {
                 //This JSON function is from SwiftyJason and parses the JSON data.
                 let user = JSON(data: data)
