@@ -30,7 +30,7 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //get current user
     func getCurrentUser() {
         // gets current user email and id
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/currentUser") {
+        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/currentUser") {
             if let data = NSData(contentsOfURL: urlToReq) {
                 //This JSON function is from SwiftyJason and parses the JSON data.
                 let user = JSON(data: data)
@@ -45,7 +45,7 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //add an order
     @IBAction func addButtonPressed(sender: UIButton) {
         let row = self.amountSelected.selectedRowInComponent(0)
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/addOrder") {
+        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/addOrder") {
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
             request.HTTPMethod = "POST"
             // Get weight
@@ -139,7 +139,7 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
 //    modularize this later DRY :)
     
     func getOrder() {
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/getReservations"){
+        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/getReservations"){
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
             request.HTTPMethod = "POST"
             let bodyData = "id=\(Int(id)!)"

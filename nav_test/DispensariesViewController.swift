@@ -19,7 +19,7 @@ class DispensariesViewController: UITableViewController {
     }
     
     func requestDispensaries() {
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/dispensaries") {
+        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/dispensaries") {
             if let data = NSData(contentsOfURL: urlToReq) {
                 let arrOfDispensaries = parseJSON(data)
                 print(arrOfDispensaries, "arrrrrr")

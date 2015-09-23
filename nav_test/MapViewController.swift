@@ -20,31 +20,34 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View Loading")
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 2000
         locationManager.startUpdatingLocation()
-        print("after locationmanager")
-        print("after mapview")
         mapView.myLocationEnabled = true
-        print("location enabled")
         mapView.settings.myLocationButton = true
-        cameraLocation = locationManager.location?.coordinate
-        if var cameraLocation = locationManager.location?.coordinate {
-            print("Camera location was set by the location manager")
-            let camera = GMSCameraPosition.cameraWithLatitude(cameraLocation.latitude, longitude: cameraLocation.longitude, zoom: 15)
-            cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
-            mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-            
-        } else {
-            print("camera location could not be set by location manager, reverting to defaults")
-            let camera = GMSCameraPosition.cameraWithLatitude(47.610377, longitude: -122.2006786, zoom: 15)
-            cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
-            mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        }
+        
+        //locationManager.requestWhenInUseAuthorization()
+       // locationManager.desiredAccuracy = kCLLocationAccuracyBest
+       // locationManager.distanceFilter = 2000
+        //locationManager.startUpdatingLocation()
+        
+        //mapView.myLocationEnabled = true
+        //print("location enabled")
+        //mapView.settings.myLocationButton = true
+        //cameraLocation = locationManager.location?.coordinate
+//        if var cameraLocation = locationManager.location?.coordinate {
+//            print("Camera location was set by the location manager")
+//            let camera = GMSCameraPosition.cameraWithLatitude(cameraLocation.latitude, longitude: cameraLocation.longitude, zoom: 15)
+//            cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
+//            mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+//            
+//        } else {
+//            print("camera location could not be set by location manager, reverting to defaults")
+//            //let camera = GMSCameraPosition.cameraWithLatitude(47.610377, longitude: -122.2006786, zoom: 15)
+//            //cameraLocation = CLLocationCoordinate2D(latitude: camera.target.latitude, longitude: camera.target.longitude)
+//            //mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
+//        }
         
         self.view = mapView
         mapView.delegate = self
@@ -52,17 +55,37 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         
     }
     
-    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print("here")
+        if status == .AuthorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+            mapView.myLocationEnabled = true
+            mapView.settings.myLocationButton = true
+        }
+    }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        cameraLocation = (locations.last?.coordinate)!
+        if let location = locations.first {
+            mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+            locationManager.stopUpdatingLocation()
+        }
+        
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location " + error.localizedDescription)
     }
     
     func mapView(mapView: GMSMapView!, didTapInfoWindowOfMarker marker: GMSMarker!) {
-        print("should segue")
+        
         dispatch_async(dispatch_get_main_queue()) {
             self.performSegueWithIdentifier("ShowMenu", sender: marker)
         }
+    }
+    
+    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        mapView.selectedMarker = marker
+        return true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -75,9 +98,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     
     
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-        print("idle")
-        
-        print(locationArray.last)
         if locationArray.last?.distanceFromLocation(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)) > 6437.38 {
             locationArray.append(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude))
             mapView.clear()
@@ -115,7 +135,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     }
     
     func getNearbyDispensaries(userLocation: CLLocationCoordinate2D) {
-        let string = "http://192.168.1.140:7000/dispensaries?lat=\(userLocation.latitude)&lng=\(userLocation.longitude)"
+        let string = "http://192.168.1.145:7000/dispensaries?lat=\(userLocation.latitude)&lng=\(userLocation.longitude)"
         //print(string)
         Alamofire.request(.GET, string)
             .response { request, response, data, error in
@@ -155,7 +175,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
             return nil
         }
     }
-    
-    
-    
 }
+
+

@@ -43,7 +43,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         let dispensaryID = String(myMarker.userData)
-        if let urlToReq = NSURL(string: "http://192.168.1.140:7000/getMenu/" + dispensaryID) {
+        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/getMenu/" + dispensaryID) {
             if let data = NSData(contentsOfURL: urlToReq) {
                 let arrOfProducts = JSON(data: data)
                 dispensaryName.title = arrOfProducts[0]["name"].string
