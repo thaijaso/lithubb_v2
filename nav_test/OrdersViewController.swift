@@ -64,7 +64,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     
     func getCurrentUser() {
         // gets current user email and id
-        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/currentUser") {
+        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/currentUser") {
             if let data = NSData(contentsOfURL: urlToReq) {
                 //This JSON function is from SwiftyJason and parses the JSON data.
                 let user = JSON(data: data)
@@ -77,7 +77,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func cancelOrder(sender: UIButton) {
-        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/cancelOrder"){
+        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/cancelOrder"){
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
             request.HTTPMethod = "POST"
             let bodyData = "id=\(Int(orderId)!)"
@@ -97,7 +97,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     }
     
     func getOrder() {
-        if let urlToReq = NSURL(string: "http://192.168.1.145:7000/getReservations"){
+        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/getReservations"){
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
             request.HTTPMethod = "POST"
             let bodyData = "id=\(Int(id)!)"

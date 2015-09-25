@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
@@ -46,7 +47,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             self.presentViewController(isValidLogin, animated: true, completion: nil)
         } else {
             // now we request to get check the email with the server
-            if let urlToReq = NSURL(string: "http://192.168.1.145:7000/loginUser") {
+            if let urlToReq = NSURL(string: "192.168.1.146:7000/loginUser") {
                 let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
                 request.HTTPMethod = "POST"
                 // Get all info from textfields to send to node server
@@ -54,7 +55,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
                 NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
                     (response, data, error) in
+                    print(response)
                     print(data)
+                    print(error)
                     let dataToPrint = JSON(data: data!)
                     let integerToCheckUser = Int(String(dataToPrint[0]["id"]))
                     if integerToCheckUser > -1 {
@@ -64,6 +67,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
             }
+            
 
         }
         
