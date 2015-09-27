@@ -46,30 +46,30 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         if let isValidLogin = validateLogin(emailTextField.text!, password: passTextField.text!) {
             self.presentViewController(isValidLogin, animated: true, completion: nil)
         } else {
-            // now we request to get check the email with the server
-            if let urlToReq = NSURL(string: "192.168.1.146:7000/loginUser") {
-                let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
-                request.HTTPMethod = "POST"
-                // Get all info from textfields to send to node server
-                let bodyData = "email=\(emailTextField.text!)&password=\(passTextField.text!)"
-                request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                    (response, data, error) in
-                    print(response)
-                    print(data)
-                    print(error)
-                    let dataToPrint = JSON(data: data!)
-                    let integerToCheckUser = Int(String(dataToPrint[0]["id"]))
-                    if integerToCheckUser > -1 {
-                        self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
-                    } else {
+            print("I am here!!!")
+            var userData = ["email": emailTextField.text!, "password": passTextField.text!]
+            //Alamofire request if the error is nil
+            let string = "http://192.168.1.146:8081/loginUser"
+            print(string)
+            Alamofire.request(.POST, string, parameters: userData, encoding: .JSON)
+                .responseJSON { request, response, result in switch result {
+                    case .Success(let data):
+                        print("this is the data", data)
+                        let userData = JSON(data)
+                        let integerToCheckUser = Int(String(userData[0]["id"]))
+                        if integerToCheckUser > -1 {
+                            self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
+                        } else {
+                            self.showSimpleAlertWithMessage("Incorrect email or password")
+                        }
+                    case .Failure(_, let error):
+                        print("Request failed with error: \(error)")
                         self.showSimpleAlertWithMessage("Incorrect email or password")
-                    }
                 }
+                    
             }
-            
-
         }
+        
         
     }
     

@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import Alamofire
 
 class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var menuItem: Menu!
     var amountSelectedData = [String]()
-    var email = String()
-    var id = String()
+    var email : String?
+    var currentUserId : String?
     
     
     @IBOutlet weak var productName: UINavigationItem!
@@ -29,66 +30,99 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //get current user
     func getCurrentUser() {
-        // gets current user email and id
-        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/currentUser") {
-            if let data = NSData(contentsOfURL: urlToReq) {
-                //This JSON function is from SwiftyJason and parses the JSON data.
-                let user = JSON(data: data)
-                let userEmail = user["email"]
-                let userId = user["id"]
-                email = String(userEmail)
-                id = String(userId)
+        let string = "http://192.168.1.146:8081/currentUser"
+        Alamofire.request(.GET, string)
+            .responseJSON { request, response, result in switch result {
+                case .Success(let data):
+                    let user = JSON(data)
+                    print("user info", user)
+                    self.currentUserId = String(user["id"])
+                    self.email = String(user["email"])
+                    print("current user ID", self.currentUserId)
+                    print("current user email", self.email)
+                case .Failure(_, let error):
+                    print("There was an error getting your user information")
+                    }
             }
-        }
     }
     
     //add an order
     @IBAction func addButtonPressed(sender: UIButton) {
-        let row = self.amountSelected.selectedRowInComponent(0)
-        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/addOrder") {
-            let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
-            request.HTTPMethod = "POST"
-            // Get weight
-            var gram = "0"
-            var eight = "0"
-            var quarter = "0"
-            var half = "0"
-            var oz = "0"
-            switch row {
-            case 0:
-                gram = "1"
-            case 1:
-                eight = "1"
-            case 2:
-                quarter = "1"
-            case 3:
-                half = "1"
-            case 4:
-                oz = "1"
-            default:
-                print("error. default thrown in switch case in productViewController")
-            }
-            // Get all info from textfields to send to node server
-            let date = NSDate()
-            let bodyData = "status=0&created_at=\(date)&updated_at=\(date)&user_id=\(id)&vendor_id=\(menuItem.vendorID)&quantity_gram=\(gram)&quantity_eigth=\(eight)&quantity_quarter=\(quarter)&quantity_half=\(half)&quantity_oz=\(oz)&strain_id=\(menuItem.strainID)"
-            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) in
-                let dataToPrint = JSON(data: data!)
-                print(dataToPrint,"here")
-                print(dataToPrint.type)
-            }
-            
+        let row = amountSelected.selectedRowInComponent(0)
+        let string = "http://192.168.1.146:8081/addOrder"
+        var gram = "0"
+        var eight = "0"
+        var quarter = "0"
+        var half = "0"
+        var oz = "0"
+        switch row {
+        case 0:
+            gram = "1"
+        case 1:
+            eight = "1"
+        case 2:
+            quarter = "1"
+        case 3:
+            half = "1"
+        case 4:
+            oz = "1"
+        default:
+            print("error. default thrown in switch case in productViewController")
         }
-
-        
+        print("this is the item row selected", row)
+        let date = String(NSDate())
+        let orderData = ["status": 0, "created_at": date, "updated_at": date, "user_id": currentUserId!, "vendor_id": menuItem.vendorID, "quantity_gram": gram, "quantity_eigth": eight, "quantity_quarter": quarter, "quantity_half": half, "quantity_oz": oz, "strain_id": menuItem.strainID]
+        //Alamofire request
+        Alamofire.request(.POST, string, parameters: orderData as! [String : AnyObject], encoding: .JSON)
+            .responseJSON { request, response, result in switch result {
+            case .Success(let data):
+                print("Order input was a success. This should be empty", data)
+            case .Failure(_, let error):
+                print("There was an error submitting order information")
+                }
+        }
+//        if let urlToReq = NSURL(string: "http://192.168.1.146:8081/addOrder") {
+//            let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
+//            request.HTTPMethod = "POST"
+//            // Get weight
+//            var gram = "0"
+//            var eight = "0"
+//            var quarter = "0"
+//            var half = "0"
+//            var oz = "0"
+//            switch row {
+//            case 0:
+//                gram = "1"
+//            case 1:
+//                eight = "1"
+//            case 2:
+//                quarter = "1"
+//            case 3:
+//                half = "1"
+//            case 4:
+//                oz = "1"
+//            default:
+//                print("error. default thrown in switch case in productViewController")
+//            }
+//            // Get all info from textfields to send to node server
+//            let date = NSDate()
+//            let bodyData = "status=0&created_at=\(date)&updated_at=\(date)&user_id=\(id)&vendor_id=\(menuItem.vendorID)&quantity_gram=\(gram)&quantity_eigth=\(eight)&quantity_quarter=\(quarter)&quantity_half=\(half)&quantity_oz=\(oz)&strain_id=\(menuItem.strainID)"
+//            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
+//            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+//                (response, data, error) in
+//                let dataToPrint = JSON(data: data!)
+//                print(dataToPrint,"here")
+//                print(dataToPrint.type)
+//            }
+//            
+//        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getCurrentUser()
-        getOrder()
+//        getOrder()
         self.amountSelected.delegate = self
         self.amountSelected.dataSource = self
         
@@ -138,18 +172,18 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
 //    modularize this later DRY :)
     
-    func getOrder() {
-        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/getReservations"){
-            let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
-            request.HTTPMethod = "POST"
-            let bodyData = "id=\(Int(id)!)"
-            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
-                (response, data, error) in
-                let realData = JSON(data: data!)
-                print(realData)
-            }
-        }
-    }
+//    func getOrder() {
+//        if let urlToReq = NSURL(string: "http://192.168.1.146:8081/getReservations"){
+//            let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
+//            request.HTTPMethod = "POST"
+//            let bodyData = "id=\(Int(id)!)"
+//            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding);
+//            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) {
+//                (response, data, error) in
+//                let realData = JSON(data: data!)
+//                print(realData)
+//            }
+//        }
+//    }
     
 }

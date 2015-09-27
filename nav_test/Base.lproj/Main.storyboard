@@ -761,7 +761,6 @@
         <!--Sign In-->
         <scene sceneID="hZN-gn-kuk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HxH-yF-HUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Sign In" id="23G-FO-aWa" customClass="SignInViewController" customModule="nav_test" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Je8-kd-Jqz"/>
@@ -778,7 +777,7 @@
                                     <constraint firstAttribute="height" constant="197" id="nC7-aY-ewJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="J2o-Gu-qXv">
@@ -899,6 +898,7 @@
                         <segue destination="hyw-Qz-khn" kind="show" identifier="UserAuthenticated" id="Yb6-fl-9Mf"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HxH-yF-HUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1203" y="1330"/>
         </scene>

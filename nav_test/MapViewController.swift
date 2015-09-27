@@ -71,37 +71,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
         mapView.selectedMarker = nil;
     }
-    //func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
-//        print("idle")
-//        if locationArray.last?.distanceFromLocation(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude)) > 6437.38 {
-//            locationArray.append(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude))
-//            mapView.clear()
-//            getNearbyDispensaries(position.target)
-//                for dispensary in dispensaries {
-//                    let marker = GMSMarker()
-//                    marker.position = CLLocationCoordinate2D(latitude: dispensary.latitude!, longitude: dispensary.longitude!)
-//                    marker.title = dispensary.name
-//                    marker.snippet = "Monday-Saturday 10AM - 10PM | Sunday 10AM-7PM"
-//                    marker.map = mapView
-//                    marker.userData = dispensary.id
-//                
-//                }
-//
-//        } else {
-//            locationArray.append(CLLocation(latitude: position.target.latitude, longitude: position.target.longitude))
-//            mapView.clear()
-//            getNearbyDispensaries(position.target)
-//            for dispensary in dispensaries {
-//                let marker = GMSMarker()
-//                marker.position = CLLocationCoordinate2D(latitude: dispensary.latitude!, longitude: dispensary.longitude!)
-//                marker.title = dispensary.name
-//                marker.snippet = "Monday-Saturday 10AM - 10PM | Sunday 10AM-7PM"
-//                marker.map = mapView
-//                marker.userData = dispensary.id
-//                
-//            }
-//        }
-    //}
+
     
     
     override func didReceiveMemoryWarning() {
@@ -110,10 +80,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     }
     
     func drawMarkersForDispensariesNear(latitude: Double, longitude: Double) {
-        //print(latitude)
-        //print(longitude)
-        ///let string = "http://192.168.1.145:7000/dispensaries?lat=\(latitude)&lng=\(longitude)"
-        let string = "http://192.168.1.146:7000/dispensaries"
+        let string = "http://192.168.1.146:8081/dispensaries"
         //print(string)
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in

@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import Alamofire
 
 class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
@@ -42,31 +43,108 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dispensaryID = String(myMarker.userData)
-        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/getMenu/" + dispensaryID) {
-            if let data = NSData(contentsOfURL: urlToReq) {
-                let arrOfProducts = JSON(data: data)
-                dispensaryName.title = arrOfProducts[0]["name"].string
-                for var i = 0; i < arrOfProducts.count; ++i {
-                    let dispensaryName = arrOfProducts[i]["name"].string
-                    let strainID = arrOfProducts[i]["strain_id"].int
-                    let strainName = arrOfProducts[i]["strain_name"].string
-                    let vendorID = arrOfProducts[i]["vendor_id"].int
-                    let priceGram = arrOfProducts[i]["price_gram"].double
-                    let priceEigth = arrOfProducts[i]["price_eigth"].double
-                    let priceQuarter = arrOfProducts[i]["price_quarter"].double
-                    let priceHalf = arrOfProducts[i]["price_half"].double
-                    let priceOz = arrOfProducts[i]["price_oz"].double
-                    let category = arrOfProducts[i]["category"].string
-                    let symbol = arrOfProducts[i]["symbol"].string
-                    let description = arrOfProducts[i]["description"].string
-                    let fullImage = arrOfProducts[i]["fullsize_img1"].string
-                    let dispensaryMenu = Menu(dispensaryName: dispensaryName!, strainID: strainID!, vendorID: vendorID!, priceGram: priceGram!, priceEigth: priceEigth!, priceQuarter: priceQuarter!, priceHalf: priceHalf!, priceOz: priceOz!, strainName: strainName!, category: category!, description: description!)
-                    dispensaryMenu.fullsize_img1 = fullImage
-                    menu.append(dispensaryMenu)
-                }
+        //product tableView source and delegate
+        self.productTableView.dataSource = self
+        self.productTableView.delegate = self
+        
+        getMenu()
+        setImages()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if menuFiltered.count == 0 {
+            print("drawing the table, the count of menu is", menu.count)
+            return menu.count
+        } else {
+            return menuFiltered.count
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = productTableView.dequeueReusableCellWithIdentifier("StrainCell") as? StrainCell
+        print("after cell\(cell)")
+        if menuFiltered.count != 0 {
+            cell!.nameLabel?.text = menuFiltered[indexPath.row].strainName as? String
+        } else {
+            cell!.nameLabel?.text = menu[indexPath.row].strainName as? String
+        }
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("ShowProduct", sender: tableView.cellForRowAtIndexPath(indexPath))
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let productViewController = segue.destinationViewController as! ProductViewController
+        if let indexPath = productTableView.indexPathForCell(sender as! UITableViewCell) {
+            productViewController.menuItem = menu[indexPath.row]
+        }
+
+        
+    }
+    
+    func filter(filter: String){
+        for product in menu {
+            if product.category as! String == filter {
+                menuFiltered.append(product)
             }
         }
+    }
+    
+    func getMenu() {
+        let dispensaryID = String(myMarker.userData)
+        //Alamo fire http request for the items disp carries
+        let string = "http://192.168.1.146:8081/getMenu/" + dispensaryID
+        Alamofire.request(.GET, string)
+            .responseJSON { request, response, result in switch result {
+            //Runs if success
+            case .Success(let data):
+                print("Checked for disp items, success")
+                let arrOfProducts = JSON(data)
+                if arrOfProducts.count != 0 {
+                    self.dispensaryName.title = arrOfProducts[0]["name"].string
+                    for var i = 0; i < arrOfProducts.count; ++i {
+                        let dispensaryName = arrOfProducts[i]["name"].string
+                        let strainID = arrOfProducts[i]["strain_id"].int
+                        let strainName = arrOfProducts[i]["strain_name"].string
+                        let vendorID = arrOfProducts[i]["vendor_id"].int
+                        let priceGram = arrOfProducts[i]["price_gram"].double
+                        let priceEigth = arrOfProducts[i]["price_eigth"].double
+                        let priceQuarter = arrOfProducts[i]["price_quarter"].double
+                        let priceHalf = arrOfProducts[i]["price_half"].double
+                        let priceOz = arrOfProducts[i]["price_oz"].double
+                        let category = arrOfProducts[i]["category"].string
+                        let symbol = arrOfProducts[i]["symbol"].string
+                        let description = arrOfProducts[i]["description"].string
+                        let fullImage = arrOfProducts[i]["fullsize_img1"].string
+                        let dispensaryMenu = Menu(dispensaryName: dispensaryName!, strainID: strainID!, vendorID: vendorID!, priceGram: priceGram!, priceEigth: priceEigth!, priceQuarter: priceQuarter!, priceHalf: priceHalf!, priceOz: priceOz!, strainName: strainName!, category: category!, description: description!)
+                        dispensaryMenu.fullsize_img1 = fullImage
+                        self.menu.append(dispensaryMenu)
+                        
+                    }
+                    print("printing the menu count", self.menu.count)
+                    self.productTableView.reloadData()
+                } else {
+                    print("there were no items")
+                }
+
+            //Failure case
+            case .Failure(_, let error):
+                print("There was an error getting your user information")
+                }
+        }
+        //End alamofire
+    }
+    //end getMenu func
+    
+    func setImages() {
         // set images and text for buttons
         edibleButton.setBackgroundImage(UIImage(named: "edibles"), forState: UIControlState.Normal)
         let ediblesAttributedTitle = NSAttributedString(string: "edibles",
@@ -88,67 +166,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let otherAttributedTitle = NSAttributedString(string: "other",
             attributes: [NSForegroundColorAttributeName : UIColor.whiteColor(), NSFontAttributeName : UIFont.systemFontOfSize(23.0)])
         otherButton.setAttributedTitle(otherAttributedTitle, forState: .Normal)
-        
-        
-        productTableView.dataSource = self
-        productTableView.delegate = self
-        
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func parseJSON(inputData: NSData) -> NSArray? {
-        do {
-            let arrOfObjects = try NSJSONSerialization.JSONObjectWithData(inputData, options: NSJSONReadingOptions.MutableContainers) as! NSArray
-            return arrOfObjects
-        } catch {
-            print(error)
-            return nil
-        }
-    }
-    
-   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if menuFiltered.count == 0 {
-            return menu.count
-        } else {
-            return menuFiltered.count
-        }
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = productTableView.dequeueReusableCellWithIdentifier("StrainCell") as? StrainCell
-        print("after cell\(cell)")
-        if menuFiltered.count != 0 {
-            cell!.nameLabel?.text = menuFiltered[indexPath.row].strainName as? String
-        } else {
-            cell!.nameLabel?.text = menu[indexPath.row].strainName as? String
-        }
-        return cell!
-    }
-    
-    func filter(filter: String){
-        for product in menu {
-            if product.category as! String == filter {
-                menuFiltered.append(product)
-            }
-        }
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("ShowProduct", sender: tableView.cellForRowAtIndexPath(indexPath))
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let productViewController = segue.destinationViewController as! ProductViewController
-        if let indexPath = productTableView.indexPathForCell(sender as! UITableViewCell) {
-            productViewController.menuItem = menu[indexPath.row]
-        }
-
-        
     }
     
 }
