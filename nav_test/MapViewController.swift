@@ -17,22 +17,24 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation?
     var locationArray = [CLLocation]()
-    var mapView = GMSMapView()
+    var mapView : GMSMapView?
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mapView = GMSMapView()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         currentLocation = locationManager.location
-        
+            
         drawMarkersForDispensariesNear(currentLocation!.coordinate.latitude, longitude: currentLocation!.coordinate.longitude)
-        
-        mapView.myLocationEnabled = true
-        mapView.settings.myLocationButton = true
-        mapView.delegate = self
-        
+            
+        mapView!.myLocationEnabled = true
+        mapView!.settings.myLocationButton = true
+        mapView!.delegate = self
         self.view = mapView
     }
     
@@ -40,14 +42,14 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
         print("here")
         if status == .AuthorizedWhenInUse {
             locationManager.startUpdatingLocation()
-            mapView.myLocationEnabled = true
-            mapView.settings.myLocationButton = true
+            mapView!.myLocationEnabled = true
+            mapView!.settings.myLocationButton = true
         }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
-            mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+            mapView!.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
             locationManager.stopUpdatingLocation()
         }
         

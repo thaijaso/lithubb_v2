@@ -16,5 +16,6 @@ class DispensaryCell: UITableViewCell {
     @IBOutlet weak var dispensaryHours: UILabel!
     @IBOutlet weak var dispensaryRating: UIImageView!
     @IBOutlet weak var dispensaryPhone: UILabel!
+    var dispensaryId: Int!
     
 }

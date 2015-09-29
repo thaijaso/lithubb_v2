@@ -37,7 +37,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     //goes to registration view
     @IBAction func registerButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier("Register", sender: sender)
+//        performSegueWithIdentifier("Register", sender: sender)
     }
     
     //SING IN for user. Goes to orders view if email/pass check succeeds
@@ -54,7 +54,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             Alamofire.request(.POST, string, parameters: userData, encoding: .JSON)
                 .responseJSON { request, response, result in switch result {
                     case .Success(let data):
-                        print("this is the data", data)
+                        print("this is the users data", data)
                         let userData = JSON(data)
                         let integerToCheckUser = Int(String(userData[0]["id"]))
                         if integerToCheckUser > -1 {
