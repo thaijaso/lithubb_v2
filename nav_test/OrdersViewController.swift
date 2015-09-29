@@ -67,7 +67,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     }
     
     func getCurrentUser() {
-        let string = "http://192.168.1.146:8081/currentUser"
+        let string = "http://lithubb.herokuapp.com/currentUser"
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in switch result {
                     case .Success(let data):
@@ -95,7 +95,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func cancelOrder(sender: UIButton) {
-        if let urlToReq = NSURL(string: "http://192.168.1.146:8081/cancelOrder"){
+        if let urlToReq = NSURL(string: "http://lithubb.herokuapp.com/cancelOrder"){
             let request: NSMutableURLRequest = NSMutableURLRequest(URL: urlToReq)
             request.HTTPMethod = "POST"
             let bodyData = "id=\(Int(orderId)!)"
@@ -116,7 +116,7 @@ class OrdersViewController: UIViewController, UITableViewDataSource {
     
     func getOrder() {
         //Alamofire getting the orders
-        let string = "http://192.168.1.146:8081/getReservations"
+        let string = "http://lithubb.herokuapp.com/getReservations"
         Alamofire.request(.POST, string)
             .responseJSON { request, response, result in switch result {
             //success case

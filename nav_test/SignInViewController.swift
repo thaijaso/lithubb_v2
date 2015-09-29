@@ -49,8 +49,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             print("I am here!!!")
             var userData = ["email": emailTextField.text!, "password": passTextField.text!]
             //Alamofire request if the error is nil
-            let string = "http://192.168.1.146:8081/loginUser"
-            print(string)
+            let string = "http://lithubb.herokuapp.com/loginUser"
+            print(userData)
             Alamofire.request(.POST, string, parameters: userData, encoding: .JSON)
                 .responseJSON { request, response, result in switch result {
                     case .Success(let data):
@@ -60,6 +60,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                         if integerToCheckUser > -1 {
                             self.performSegueWithIdentifier("UserAuthenticated", sender: sender)
                         } else {
+                            print("This was the error response", response)
                             self.showSimpleAlertWithMessage("Incorrect email or password")
                         }
                     case .Failure(_, let error):
