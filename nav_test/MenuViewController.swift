@@ -101,7 +101,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func getMenu() {
         let dispensaryID = String(myMarker.userData)
         //Alamo fire http request for the items disp carries
-        let string = "http://192.168.1.146:8081/getMenu/" + dispensaryID
+        let string = "http://lithubb.herokuapp.com/getMenu/" + dispensaryID
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in switch result {
             //Runs if success
@@ -109,7 +109,6 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("Checked for disp items, success")
                 let arrOfProducts = JSON(data)
                 if arrOfProducts.count != 0 {
-                    self.dispensaryName.title = arrOfProducts[0]["name"].string
                     for var i = 0; i < arrOfProducts.count; ++i {
                         let dispensaryName = arrOfProducts[i]["name"].string
                         let strainID = arrOfProducts[i]["strain_id"].int

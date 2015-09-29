@@ -30,7 +30,7 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     //get current user
     func getCurrentUser() {
-        let string = "http://192.168.1.146:8081/currentUser"
+        let string = "http://lithubb.herokuapp.com/currentUser"
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in switch result {
                 case .Success(let data):
@@ -49,7 +49,7 @@ class ProductViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //add an order
     @IBAction func addButtonPressed(sender: UIButton) {
         let row = amountSelected.selectedRowInComponent(0)
-        let string = "http://192.168.1.146:8081/addOrder"
+        let string = "http://lithubb.herokuapp.com/addOrder"
         var gram = "0"
         var eight = "0"
         var quarter = "0"

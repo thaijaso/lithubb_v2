@@ -80,7 +80,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate, CLLocationManager
     }
     
     func drawMarkersForDispensariesNear(latitude: Double, longitude: Double) {
-        let string = "http://192.168.1.146:8081/dispensaries"
+        let string = "http://lithubb.herokuapp.com/dispensaries"
         //print(string)
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in

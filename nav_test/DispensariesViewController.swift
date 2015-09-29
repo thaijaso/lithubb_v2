@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class DispensariesViewController: UITableViewController {
     
@@ -19,25 +21,32 @@ class DispensariesViewController: UITableViewController {
     }
     
     func requestDispensaries() {
-        if let urlToReq = NSURL(string: "http://192.168.1.146:7000/dispensaries") {
-            if let data = NSData(contentsOfURL: urlToReq) {
-                let arrOfDispensaries = parseJSON(data)
-                print(arrOfDispensaries, "arrrrrr")
-                for dispensary in arrOfDispensaries! {
-                    let object = dispensary as! NSDictionary
-                    let id = object["id"] as! Int
-                    let name = object["name"] as! String
-                    let address = object["address"] as! String
-                    let phone = object["phone"] as! String
-                    let city = object["City"] as! String
-                    let state = object["State"] as! String
-                    let logo = object["logo"] as! String
-                    //let latitude = object["latitude"] as! Double
-                    //let longitude = object["longitude"] as! Double
-                    let dispensaryToAppend = Dispensary(id: id, name: name, address: address, city: city, state: state, phone: phone, logo: logo)
-                    dispensaries.append(dispensaryToAppend)
+        let string = "http://lithubb.herokuapp.com/dispensaries"
+        //print(string)
+        Alamofire.request(.GET, string)
+            .responseJSON { request, response, result in
+                switch result {
+                case .Success(let data):
+                    let arrayOfDispensaries = JSON(data)
+                    for var i = 0; i < arrayOfDispensaries.count; ++i {
+                        let dispensaryID = arrayOfDispensaries[i]["id"].int
+                        let dispensaryName = arrayOfDispensaries[i]["name"].string
+                        let dispensaryLat = arrayOfDispensaries[i]["lat"].double
+                        let dispensaryLng = arrayOfDispensaries[i]["lng"].double
+                        let dispensaryAdd = arrayOfDispensaries[i]["address"].string
+                        let dispensaryState = arrayOfDispensaries[i]["State"].string
+                        let dispensaryCity = arrayOfDispensaries[i]["City"].string
+                        let dispensaryPhone = arrayOfDispensaries[i]["phone"].string
+                        let dispensaryLogo = arrayOfDispensaries[i]["logo"].string
+                        let dispensary = Dispensary(id: dispensaryID!, name: dispensaryName!, address: dispensaryAdd!, city: dispensaryCity!, state: dispensaryState!, phone: dispensaryPhone!, logo: dispensaryLogo!)
+                        dispensary.latitude = dispensaryLat!
+                        dispensary.longitude = dispensaryLng!
+                        self.dispensaries.append(dispensary)
+                    }
+                case .Failure(_, let error):
+                    print("Request failed with error: \(error)")
+                    
                 }
-            }
         }
     }
     
