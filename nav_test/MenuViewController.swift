@@ -14,7 +14,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var menu = [Menu]()
     var menuFiltered = [Menu]()
-    var myMarker : GMSMarker!
+    var myMarker : GMSMarker?
+    var dispensary : Dispensary?
     
     @IBOutlet weak var productTableView: UITableView!
     @IBOutlet weak var dispensaryName: UINavigationItem!
@@ -46,9 +47,9 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //product tableView source and delegate
         self.productTableView.dataSource = self
         self.productTableView.delegate = self
-        
         getMenu()
         setImages()
+        productTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,9 +100,17 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func getMenu() {
-        let dispensaryID = String(myMarker.userData)
+        let dispensaryID : String?
+        if myMarker?.userData != nil {
+            dispensaryID = String(myMarker!.userData)
+        } else {
+            dispensaryID = String(dispensary!.id)
+        }
+        print("this is the id", dispensaryID)
+        
+        
         //Alamo fire http request for the items disp carries
-        let string = "http://lithubb.herokuapp.com/getMenu/" + dispensaryID
+        let string = "http://lithubb.herokuapp.com/getMenu/" + dispensaryID!
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in switch result {
             //Runs if success
@@ -126,8 +135,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         let dispensaryMenu = Menu(dispensaryName: dispensaryName!, strainID: strainID!, vendorID: vendorID!, priceGram: priceGram!, priceEigth: priceEigth!, priceQuarter: priceQuarter!, priceHalf: priceHalf!, priceOz: priceOz!, strainName: strainName!, category: category!, description: description!)
                         dispensaryMenu.fullsize_img1 = fullImage
                         self.menu.append(dispensaryMenu)
-                        
                     }
+                    self.dispensaryName.title = self.menu[0].dispensaryName
                     print("printing the menu count", self.menu.count)
                     self.productTableView.reloadData()
                 } else {
