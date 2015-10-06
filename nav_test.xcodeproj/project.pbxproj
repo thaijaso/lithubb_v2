@@ -27,6 +27,9 @@
 		0476901C1BAC094D001F749E /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047690181BAC094D001F749E /* SignInViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		04A60EDE1BA73F9C0068715E /* DispensariesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A60EDD1BA73F9C0068715E /* DispensariesListViewController.swift */; };
 		04E42AF41BABEF22007C789E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E42AF31BABEF22007C789E /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2A42D1F51BBF57BD00EAF905 /* KeychainSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42D1F41BBF57BD00EAF905 /* KeychainSwift.swift */; settings = {ASSET_TAGS = (); }; };
+		2A42D1F71BBF5E7B00EAF905 /* CheckUserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42D1F61BBF5E7B00EAF905 /* CheckUserController.swift */; settings = {ASSET_TAGS = (); }; };
+		2A42D1F91BBF62C900EAF905 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42D1F81BBF62C900EAF905 /* UserViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		2AF6AAD71BBA322A007183E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AF6AAD51BBA322A007183E1 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		2AF6AAD91BBA4048007183E1 /* DispensariesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		8204D48BE7EB168611952F5B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49630389B6061F45C815E714 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -77,6 +80,9 @@
 		047690181BAC094D001F749E /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		04A60EDD1BA73F9C0068715E /* DispensariesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispensariesListViewController.swift; sourceTree = "<group>"; };
 		04E42AF31BABEF22007C789E /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2A42D1F41BBF57BD00EAF905 /* KeychainSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainSwift.swift; sourceTree = "<group>"; };
+		2A42D1F61BBF5E7B00EAF905 /* CheckUserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckUserController.swift; sourceTree = "<group>"; };
+		2A42D1F81BBF62C900EAF905 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		2AF6AAD61BBA322A007183E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispensariesViewController.swift; sourceTree = "<group>"; };
 		49630389B6061F45C815E714 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,15 +140,27 @@
 		0455E2951BA6CC3B00061792 /* nav_test */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				041961771BBF2744004673CB /* Assets.xcassets */,
 				04061F5A1BBCAE7D0007FAFA /* CustomInfoWindow.xib */,
+=======
+				2AF6AAD51BBA322A007183E1 /* Main.storyboard */,
+				2A42D1F61BBF5E7B00EAF905 /* CheckUserController.swift */,
+				2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */,
+				0455E29D1BA6CC3B00061792 /* Assets.xcassets */,
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
 				0455E29F1BA6CC3B00061792 /* LaunchScreen.storyboard */,
 				2AF6AAD51BBA322A007183E1 /* Main.storyboard */,
 				0455E2961BA6CC3B00061792 /* AppDelegate.swift */,
+<<<<<<< HEAD
 				046FBFCA1BBCBA420072AB93 /* CustomInfoWindow.swift */,
 				042C2D631BA7A27900C85862 /* DispensaryCell.swift */,
 				042C2D611BA78E7800C85862 /* Dispensary.swift */,
 				2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */,
+=======
+				047690131BAC08A9001F749E /* SwiftyJSON.swift */,
+				2A42D1F81BBF62C900EAF905 /* UserViewController.swift */,
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
 				04A60EDD1BA73F9C0068715E /* DispensariesListViewController.swift */,
 				04E42AF31BABEF22007C789E /* MapViewController.swift */,
 				04276F961BAB67C400B605FD /* Menu.swift */,
@@ -152,6 +170,11 @@
 				04276F981BABD00900B605FD /* ProductViewController.swift */,
 				047690171BAC094D001F749E /* RegistrationViewController.swift */,
 				047690181BAC094D001F749E /* SignInViewController.swift */,
+<<<<<<< HEAD
+=======
+				2A42D1F41BBF57BD00EAF905 /* KeychainSwift.swift */,
+				040363151BAA092D00740C3A /* MenuViewController.swift */,
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
 				040363171BAA0A1B00740C3A /* StrainCell.swift */,
 				047690131BAC08A9001F749E /* SwiftyJSON.swift */,
 				0455E2A21BA6CC3B00061792 /* Info.plist */,
@@ -265,7 +288,7 @@
 				TargetAttributes = {
 					0455E2921BA6CC3B00061792 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = GKTKN5Z262;
+						DevelopmentTeam = BMNS2Z2BU9;
 					};
 					0455E2A61BA6CC3C00061792 = {
 						CreatedOnToolsVersion = 7.0;
@@ -379,6 +402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0476901C1BAC094D001F749E /* SignInViewController.swift in Sources */,
+				2A42D1F91BBF62C900EAF905 /* UserViewController.swift in Sources */,
 				040363161BAA092D00740C3A /* MenuViewController.swift in Sources */,
 				047690191BAC094D001F749E /* OrderCell.swift in Sources */,
 				04A60EDE1BA73F9C0068715E /* DispensariesListViewController.swift in Sources */,
@@ -386,6 +410,7 @@
 				0476901B1BAC094D001F749E /* RegistrationViewController.swift in Sources */,
 				047690141BAC08A9001F749E /* SwiftyJSON.swift in Sources */,
 				04276F971BAB67C400B605FD /* Menu.swift in Sources */,
+				2A42D1F71BBF5E7B00EAF905 /* CheckUserController.swift in Sources */,
 				2AF6AAD91BBA4048007183E1 /* DispensariesViewController.swift in Sources */,
 				04276F991BABD00900B605FD /* ProductViewController.swift in Sources */,
 				0476901A1BAC094D001F749E /* OrdersViewController.swift in Sources */,
@@ -393,7 +418,11 @@
 				0455E2971BA6CC3B00061792 /* AppDelegate.swift in Sources */,
 				040363181BAA0A1B00740C3A /* StrainCell.swift in Sources */,
 				042C2D621BA78E7800C85862 /* Dispensary.swift in Sources */,
+<<<<<<< HEAD
 				046FBFCB1BBCBA420072AB93 /* CustomInfoWindow.swift in Sources */,
+=======
+				2A42D1F51BBF57BD00EAF905 /* KeychainSwift.swift in Sources */,
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

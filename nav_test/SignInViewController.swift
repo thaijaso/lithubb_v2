@@ -13,12 +13,19 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
+    
+    let keychain = KeychainSwift()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
+        var userEmail = keychain.get("email")
+        if userEmail != nil {
+            //segue if logged in
+            performSegueWithIdentifier("previousLogin", sender: nil)
+        }
         // delegate this viewcontroller so we can press return to dismiss keyboard.
         self.emailTextField.delegate = self
         self.passTextField.delegate = self
@@ -56,6 +63,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                     case .Success(let data):
                         print("this is the users data", data)
                         let userData = JSON(data)
+                        let keyChainEmail = String(userData[0]["email"])
+                        print("keychain email to set: ", keyChainEmail)
+                        self.keychain.set(keyChainEmail, forKey: "email")
                         let integerToCheckUser = Int(String(userData[0]["id"]))
                         if integerToCheckUser > -1 {
                             self.performSegueWithIdentifier("UserAuthenticated", sender: sender)

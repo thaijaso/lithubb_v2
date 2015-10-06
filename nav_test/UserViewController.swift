@@ -7,4 +7,25 @@
 //
 
 import Foundation
+import UIKit
+import Alamofire
 
+
+
+class UserViewController: UIViewController {
+    @IBOutlet weak var userEmailLabel: UILabel!
+    
+    let keychain = KeychainSwift()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var userEmail = keychain.get("email")
+        if userEmail != nil {
+            userEmailLabel.text = userEmail!
+        }
+        
+    }
+    
+}

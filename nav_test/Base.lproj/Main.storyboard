@@ -812,12 +812,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HxH-yF-HUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3813" y="35"/>
+            <point key="canvasLocation" x="3730" y="-741"/>
         </scene>
-        <!--View Controller-->
+        <!--User View Controller-->
         <scene sceneID="0cO-w6-PDA">
             <objects>
-                <viewController id="KdG-Yp-pNK" sceneMemberID="viewController">
+                <viewController id="KdG-Yp-pNK" customClass="UserViewController" customModule="nav_test" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d3t-Pg-1zy"/>
                         <viewControllerLayoutGuide type="bottom" id="Y3B-pq-RHm"/>
@@ -827,7 +827,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AUTHENTICATED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMI-5w-QeA">
-                                <rect key="frame" x="20" y="20" width="136" height="21"/>
+                                <rect key="frame" x="232" y="72" width="136" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -835,10 +835,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="userEmailLabel" destination="AMI-5w-QeA" id="wwT-lo-sJu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DXz-zE-ovC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4698" y="-212"/>
+            <point key="canvasLocation" x="3730" y="35"/>
         </scene>
         <!--Main Tab Controller-->
         <scene sceneID="oVd-UG-SZR">
@@ -905,8 +908,13 @@
         <!--Navigation Controller-->
         <scene sceneID="NQo-70-yy4">
             <objects>
+<<<<<<< HEAD
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pd5-fX-ZZG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="featured" id="EIq-oY-tUF"/>
+=======
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pd5-fX-ZZG" customClass="CheckUserController" customModule="nav_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="User" id="EIq-oY-tUF"/>
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nBR-yg-mAF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -914,7 +922,8 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="23G-FO-aWa" kind="relationship" relationship="rootViewController" id="AiC-68-jBR"/>
+                        <segue destination="KdG-Yp-pNK" kind="show" identifier="previouslyLoggedin" id="508-1y-sfc"/>
+                        <segue destination="23G-FO-aWa" kind="show" identifier="pleaseLogIn" id="k4I-a0-fVz"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhX-im-F9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1073,6 +1082,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TeE-2M-miT"/>
+<<<<<<< HEAD
         <segue reference="JbD-oF-T18"/>
+=======
+        <segue reference="Bhp-qt-bVI"/>
+        <segue reference="508-1y-sfc"/>
+>>>>>>> 895335602b3ca2a6ba194d9b45d5e7d15aaa194e
     </inferredMetricsTieBreakers>
 </document>
