@@ -75,7 +75,7 @@ class DispensariesListViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.dispensaries.count)
+        //print(self.dispensaries.count)
         if self.dispensaries.count == 0 {
             return 0
         }
@@ -92,7 +92,7 @@ class DispensariesListViewController: UIViewController, UITableViewDelegate, UIT
         cell.dispensaryCityState!.text = dispensary.city.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) + ", " + dispensary.state
 //        cell.dispensaryHours!.text = dispensary.hours
         
-       print(dispensary.logo, "cat")
+       //print(dispensary.logo, "cat")
         
         let request: NSURLRequest = NSURLRequest(URL: NSURL(string: dispensary.logo)!)
         let mainQueue = NSOperationQueue.mainQueue()

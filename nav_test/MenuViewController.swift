@@ -100,17 +100,24 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func getMenu() {
-        let dispensaryID : String?
+        let dispensary: Dispensary?
+        let dispensaryID: String?
+        
         if myMarker?.userData != nil {
-            dispensaryID = String(myMarker!.userData)
-        } else {
+            dispensary = myMarker!.userData! as! Dispensary
+            print(dispensary!)
             dispensaryID = String(dispensary!.id)
+            print(dispensaryID)
+        } else {
+            //dispensaryID = String(dispensary!.id)
+            dispensaryID = "1"
         }
-        print("this is the id", dispensaryID)
+        //print("this is the id", dispensaryID)
         
         
         //Alamo fire http request for the items disp carries
-        let string = "http://lithubb.herokuapp.com/getMenu/" + dispensaryID!
+        let string = "http://lithubb.herokuapp.com/getMenu/\(dispensaryID!)"
+        print(string)
         Alamofire.request(.GET, string)
             .responseJSON { request, response, result in switch result {
             //Runs if success

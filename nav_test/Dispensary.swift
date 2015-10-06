@@ -18,6 +18,7 @@ class Dispensary {
     var longitude: Double?
     var phone: String
     var logo: String
+    var distance: Double?
     //var hours: String
     
     init(id: Int, name: String, address: String, city: String, state: String, phone: String, logo: String) {

@@ -9,15 +9,17 @@
 /* Begin PBXBuildFile section */
 		040363161BAA092D00740C3A /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040363151BAA092D00740C3A /* MenuViewController.swift */; };
 		040363181BAA0A1B00740C3A /* StrainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040363171BAA0A1B00740C3A /* StrainCell.swift */; };
+		04061F5B1BBCAE7D0007FAFA /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04061F5A1BBCAE7D0007FAFA /* CustomInfoWindow.xib */; settings = {ASSET_TAGS = (); }; };
+		041961781BBF2744004673CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041961771BBF2744004673CB /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		04276F971BAB67C400B605FD /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04276F961BAB67C400B605FD /* Menu.swift */; };
 		04276F991BABD00900B605FD /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04276F981BABD00900B605FD /* ProductViewController.swift */; };
 		042C2D621BA78E7800C85862 /* Dispensary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C2D611BA78E7800C85862 /* Dispensary.swift */; };
 		042C2D641BA7A27900C85862 /* DispensaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042C2D631BA7A27900C85862 /* DispensaryCell.swift */; };
 		0455E2971BA6CC3B00061792 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455E2961BA6CC3B00061792 /* AppDelegate.swift */; };
-		0455E29E1BA6CC3B00061792 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0455E29D1BA6CC3B00061792 /* Assets.xcassets */; };
 		0455E2A11BA6CC3B00061792 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0455E29F1BA6CC3B00061792 /* LaunchScreen.storyboard */; };
 		0455E2AC1BA6CC3C00061792 /* nav_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455E2AB1BA6CC3C00061792 /* nav_testTests.swift */; };
 		0455E2B71BA6CC3C00061792 /* nav_testUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455E2B61BA6CC3C00061792 /* nav_testUITests.swift */; };
+		046FBFCB1BBCBA420072AB93 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FBFCA1BBCBA420072AB93 /* CustomInfoWindow.swift */; settings = {ASSET_TAGS = (); }; };
 		047690141BAC08A9001F749E /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047690131BAC08A9001F749E /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		047690191BAC094D001F749E /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047690151BAC094D001F749E /* OrderCell.swift */; settings = {ASSET_TAGS = (); }; };
 		0476901A1BAC094D001F749E /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047690161BAC094D001F749E /* OrdersViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -51,13 +53,14 @@
 		0340E69312202D1ABDFF8D28 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		040363151BAA092D00740C3A /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		040363171BAA0A1B00740C3A /* StrainCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrainCell.swift; sourceTree = "<group>"; };
+		04061F5A1BBCAE7D0007FAFA /* CustomInfoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
+		041961771BBF2744004673CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../documents/lithubb_v2/Assets.xcassets; sourceTree = "<group>"; };
 		04276F961BAB67C400B605FD /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		04276F981BABD00900B605FD /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
 		042C2D611BA78E7800C85862 /* Dispensary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dispensary.swift; sourceTree = "<group>"; };
 		042C2D631BA7A27900C85862 /* DispensaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispensaryCell.swift; sourceTree = "<group>"; };
 		0455E2931BA6CC3B00061792 /* nav_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nav_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0455E2961BA6CC3B00061792 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0455E29D1BA6CC3B00061792 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0455E2A01BA6CC3B00061792 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0455E2A21BA6CC3B00061792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0455E2A71BA6CC3C00061792 /* nav_testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nav_testTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +69,7 @@
 		0455E2B21BA6CC3C00061792 /* nav_testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nav_testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0455E2B61BA6CC3C00061792 /* nav_testUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nav_testUITests.swift; sourceTree = "<group>"; };
 		0455E2B81BA6CC3C00061792 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		046FBFCA1BBCBA420072AB93 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
 		047690131BAC08A9001F749E /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		047690151BAC094D001F749E /* OrderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		047690161BAC094D001F749E /* OrdersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
@@ -130,24 +134,26 @@
 		0455E2951BA6CC3B00061792 /* nav_test */ = {
 			isa = PBXGroup;
 			children = (
-				2AF6AAD51BBA322A007183E1 /* Main.storyboard */,
-				2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */,
-				0455E29D1BA6CC3B00061792 /* Assets.xcassets */,
+				041961771BBF2744004673CB /* Assets.xcassets */,
+				04061F5A1BBCAE7D0007FAFA /* CustomInfoWindow.xib */,
 				0455E29F1BA6CC3B00061792 /* LaunchScreen.storyboard */,
+				2AF6AAD51BBA322A007183E1 /* Main.storyboard */,
 				0455E2961BA6CC3B00061792 /* AppDelegate.swift */,
-				047690131BAC08A9001F749E /* SwiftyJSON.swift */,
-				04A60EDD1BA73F9C0068715E /* DispensariesListViewController.swift */,
-				04E42AF31BABEF22007C789E /* MapViewController.swift */,
-				047690151BAC094D001F749E /* OrderCell.swift */,
-				047690161BAC094D001F749E /* OrdersViewController.swift */,
-				047690171BAC094D001F749E /* RegistrationViewController.swift */,
-				047690181BAC094D001F749E /* SignInViewController.swift */,
-				040363151BAA092D00740C3A /* MenuViewController.swift */,
-				040363171BAA0A1B00740C3A /* StrainCell.swift */,
+				046FBFCA1BBCBA420072AB93 /* CustomInfoWindow.swift */,
 				042C2D631BA7A27900C85862 /* DispensaryCell.swift */,
 				042C2D611BA78E7800C85862 /* Dispensary.swift */,
+				2AF6AAD81BBA4048007183E1 /* DispensariesViewController.swift */,
+				04A60EDD1BA73F9C0068715E /* DispensariesListViewController.swift */,
+				04E42AF31BABEF22007C789E /* MapViewController.swift */,
 				04276F961BAB67C400B605FD /* Menu.swift */,
+				040363151BAA092D00740C3A /* MenuViewController.swift */,
+				047690151BAC094D001F749E /* OrderCell.swift */,
+				047690161BAC094D001F749E /* OrdersViewController.swift */,
 				04276F981BABD00900B605FD /* ProductViewController.swift */,
+				047690171BAC094D001F749E /* RegistrationViewController.swift */,
+				047690181BAC094D001F749E /* SignInViewController.swift */,
+				040363171BAA0A1B00740C3A /* StrainCell.swift */,
+				047690131BAC08A9001F749E /* SwiftyJSON.swift */,
 				0455E2A21BA6CC3B00061792 /* Info.plist */,
 			);
 			path = nav_test;
@@ -298,7 +304,8 @@
 			files = (
 				2AF6AAD71BBA322A007183E1 /* Main.storyboard in Resources */,
 				0455E2A11BA6CC3B00061792 /* LaunchScreen.storyboard in Resources */,
-				0455E29E1BA6CC3B00061792 /* Assets.xcassets in Resources */,
+				04061F5B1BBCAE7D0007FAFA /* CustomInfoWindow.xib in Resources */,
+				041961781BBF2744004673CB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +393,7 @@
 				0455E2971BA6CC3B00061792 /* AppDelegate.swift in Sources */,
 				040363181BAA0A1B00740C3A /* StrainCell.swift in Sources */,
 				042C2D621BA78E7800C85862 /* Dispensary.swift in Sources */,
+				046FBFCB1BBCBA420072AB93 /* CustomInfoWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
